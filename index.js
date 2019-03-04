@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 const bodyParser = require("body-parser");
-app.post("/", bodyParser.urlencoded(), (req, res) => {
+app.post("/", bodyParser.urlencoded({extended: true}), (req, res) => {
 	const body = (req.body || {});
 	const viewModel = {
 		sessionId: req.cookies.sessionId,

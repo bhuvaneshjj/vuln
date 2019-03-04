@@ -9,6 +9,9 @@
 		"type": "git",
 		"url": "https://github.com/psmorrow/vulnerable-web-application.git"
 	},
+	"scripts": {
+		"start": "node index.js"
+	},
 	"dependencies": {
 		"body-parser": "1.16.1",
 		"config": "1.25.0",
