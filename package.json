@@ -10,6 +10,7 @@
 		"url": "https://github.com/psmorrow/vulnerable-web-application.git"
 	},
 	"scripts": {
+		"lint": "./node_modules/.bin/eslint .",
 		"start": "node index.js"
 	},
 	"dependencies": {
@@ -20,5 +21,11 @@
 		"hogan": "1.0.2",
 		"hogan-express": "0.5.2"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"chai": "4.2.0",
+		"chai-spies": "1.0.0",
+		"eslint": "5.15.0",
+		"mocha": "6.0.1",
+		"nyc": "13.3.0"
+	}
 }
