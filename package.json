@@ -1,0 +1,21 @@
+{
+	"name": "vulnerable-web-application",
+	"version": "1.0.0",
+	"author": {
+		"name": "Patrick Morrow"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/psmorrow/vulnerable-web-application.git"
+	},
+	"dependencies": {
+		"body-parser": "1.16.1",
+		"config": "1.25.0",
+		"cookie-parser": "1.4.3",
+		"express": "4.13.2",
+		"hogan": "^1.0.2",
+		"hogan-express": "^0.5.2"
+	},
+	"devDependencies": {}
+}

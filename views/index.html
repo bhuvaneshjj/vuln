@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ name }}</title>
+	<link type="text/css" rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<h1>{{ name }} v{{ version }}</h1>
+	<div class="sessionid">Session ID: {{ sessionId }}</div>
+	<div class="value1">Value 1: {{ value1 }}</div>
+	<div class="value2">Value 2: {{{ value2 }}}</div>
+	<hr>
+	<form action="/" method="post">
+		<div><label for="value1">Value 1:</label><input type="text" name="value1" id="value1" value=""></div>
+		<div><label for="value2">Value 2:</label><input type="text" name="value2" id="value2" value=""></div>
+		<div><input type="submit" value="Submit"></div>
+	</form>
+</body>
+</html>
