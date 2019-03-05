@@ -87,7 +87,7 @@ const application = {
 if (require.main === module) {
 	const args = process.argv.slice(2);
 	const port = (args.length >= 1 ? args[0] : undefined);
-	console.log(">>> PORT >>>", port, "<<<");
+
 	application.start(port);
 } else {
 	module.exports = application;

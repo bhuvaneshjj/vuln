@@ -9,7 +9,7 @@ chai.use(spies);
 
 const application = require('../index');
 
-const SERVER_START_TIMEOUT = 1000;
+const SERVER_START_TIMEOUT = 1500;
 
 describe('vulnerable web application', () => {
 
