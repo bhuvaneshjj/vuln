@@ -11,7 +11,21 @@
 	},
 	"scripts": {
 		"lint": "./node_modules/.bin/eslint .",
+		"test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha tests/**/*.js",
 		"start": "node index.js"
+	},
+	"nyc": {
+		"all": true,
+		"exclude": [
+			".nyc_output/**",
+			"coverage/**",
+			"node_modules/**",
+			"tests/**"
+		],
+		"reporter": [
+			"lcov",
+			"text"
+		]
 	},
 	"dependencies": {
 		"body-parser": "1.16.1",
