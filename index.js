@@ -37,7 +37,13 @@ const utilities = {
 
 		app.use(express.static("./public"));
 
-		app.get("/", (req, res) => {
+		app.get("/", utilities.handleGetRoute(config));
+
+		const bodyParser = require("body-parser");
+		app.post("/", bodyParser.urlencoded({extended: true}), utilities.handlePostRoute(config));
+	},
+	handleGetRoute: (config) => {
+		return (req, res) => {
 			const sessionId = req.cookies.sessionId || Date.now();
 			if (!req.cookies.sessionId) {
 				res.cookie("sessionId", sessionId);
@@ -48,10 +54,10 @@ const utilities = {
 				version: config.version
 			};
 			res.render("index", viewModel);
-		});
-
-		const bodyParser = require("body-parser");
-		app.post("/", bodyParser.urlencoded({extended: true}), (req, res) => {
+		};
+	},
+	handlePostRoute: (config) => {
+		return (req, res) => {
 			const body = (req.body || {});
 			const viewModel = {
 				sessionId: req.cookies.sessionId,
@@ -61,7 +67,7 @@ const utilities = {
 				value2: body.value2 || ""
 			};
 			res.render("index", viewModel);
-		});
+		};
 	},
 	startServer: (config, app) => {
 		const server = app.listen(config.port, () => {

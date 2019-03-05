@@ -74,7 +74,69 @@ describe('vulnerable web application', () => {
 			const { express, app } = application.utilities.configureExpress();
 			application.utilities.configureRoutes(config, express, app);
 
-			// TODO: how to test the routes are configured???
+			const routes = app._router.stack.filter(r => r.route).map(r => r.route);
+			expect(routes.length).to.be.equal(2);
+		});
+	});
+
+	describe('handle get route', () => {
+
+		it('should return handler method', () => {
+			const config = application.utilities.getConfiguration();
+			const results = application.utilities.handleGetRoute(config);
+
+			expect(results).to.be.an.instanceof(Function);
+		});
+
+		it('should call cookie and render', () => {
+			const config = application.utilities.getConfiguration();
+			const handler = application.utilities.handleGetRoute(config);
+
+			const req = {
+				cookies: {}
+			};
+			const res = {
+				cookie: () => {},
+				render: () => {}
+			};
+
+			let cookieSpy = chai.spy.on(res, 'cookie');
+			let renderSpy = chai.spy.on(res, 'render');
+
+			handler(req, res);
+
+			expect(cookieSpy).to.have.been.called.with('sessionId');
+			expect(renderSpy).to.have.been.called.with('index');
+		});
+	});
+
+	describe('handle post route', () => {
+
+		it('should return handler method', () => {
+			const config = application.utilities.getConfiguration();
+			const results = application.utilities.handlePostRoute(config);
+
+			expect(results).to.be.an.instanceof(Function);
+		});
+
+		it('should call cookie and render', () => {
+			const config = application.utilities.getConfiguration();
+			const handler = application.utilities.handlePostRoute(config);
+
+			const req = {
+				cookies: {
+					sessionId: 12345
+				}
+			};
+			const res = {
+				render: () => {}
+			};
+
+			let renderSpy = chai.spy.on(res, 'render');
+
+			handler(req, res);
+
+			expect(renderSpy).to.have.been.called.with('index');
 		});
 	});
 
