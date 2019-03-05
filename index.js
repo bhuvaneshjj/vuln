@@ -83,6 +83,7 @@ const application = {
 	utilities: utilities
 };
 
+console.log(">>> REQUIRE MAIN >>>", require.main, "<<<");
 if (require.main === module) {
 	const args = process.argv.slice(2);
 	const port = (args.length >= 1 ? args[0] : undefined);
