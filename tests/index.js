@@ -128,6 +128,7 @@ describe('vulnerable web application', () => {
 		it('should output listening message with default port', () => {
 			const cliFullPath = path.resolve(`${__dirname}/../index.js`);
 			exec(`node "${cliFullPath}"`, { timeout: SERVER_START_TIMEOUT }, (err, stdout, stderr) => {
+				console.log(stdout);
 				expect(err).to.not.be.null;
 				expect(stdout).to.include('Server listening on port: 8000');
 				expect(stderr).to.be.empty;
@@ -137,6 +138,7 @@ describe('vulnerable web application', () => {
 		it('should output listening message with argument port', () => {
 			const cliFullPath = path.resolve(`${__dirname}/../index.js`);
 			exec(`node "${cliFullPath}" 8081`, { timeout: SERVER_START_TIMEOUT }, (err, stdout, stderr) => {
+				console.log(stdout);
 				expect(err).to.not.be.null;
 				expect(stdout).to.include('Server listening on port: 8081');
 				expect(stderr).to.be.empty;
