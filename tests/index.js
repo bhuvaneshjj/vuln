@@ -55,7 +55,7 @@ describe('vulnerable web application', () => {
 	describe('configure hogan', () => {
 
 		it('should have view settings', () => {
-			const { express, app } = application.utilities.configureExpress();
+			const { app } = application.utilities.configureExpress();
 			application.utilities.configureHogan(app);
 
 			expect(app.get("views")).to.include("/views");
