@@ -119,7 +119,7 @@ describe('vulnerable web application', () => {
 			expect(results).to.be.an.instanceof(Function);
 		});
 
-		it('should call cookie and render', () => {
+		it('should call render', () => {
 			const config = application.utilities.getConfiguration();
 			const handler = application.utilities.handlePostRoute(config);
 
