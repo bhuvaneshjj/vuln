@@ -78,7 +78,7 @@ const application = {
 		const { express, app } = utilities.configureExpress();
 		utilities.configureHogan(app);
 		utilities.configureRoutes(config, express, app);
-		utilities.startServer(config, app);
+		return utilities.startServer(config, app);
 	},
 	utilities: utilities
 };

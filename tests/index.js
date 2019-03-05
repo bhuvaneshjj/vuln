@@ -9,6 +9,8 @@ chai.use(spies);
 
 const application = require('../index');
 
+const SERVER_START_TIMEOUT = 1000;
+
 describe('vulnerable web application', () => {
 
 	beforeEach(() => {
@@ -86,11 +88,38 @@ describe('vulnerable web application', () => {
 
 			setTimeout(() => {
 				expect(server.listening).to.be.true;
-				expect(console.log).to.have.been.called.with(`Server listening on port: ${server.address().port}`);
+				expect(console.log).to.have.been.called.with(`Server listening on port: 8000`);
 
 				server.close();
 				done();
-			}, 100);
+			}, SERVER_START_TIMEOUT);
+		});
+	});
+
+	describe('application start', () => {
+
+		it('should output listening message with defaylt port', (done) => {
+			const server = application.start();
+
+			setTimeout(() => {
+				expect(server.listening).to.be.true;
+				expect(console.log).to.have.been.called.with(`Server listening on port: 8000`);
+
+				server.close();
+				done();
+			}, SERVER_START_TIMEOUT);
+		});
+
+		it('should output listening message with argument port', (done) => {
+			const server = application.start(8081);
+
+			setTimeout(() => {
+				expect(server.listening).to.be.true;
+				expect(console.log).to.have.been.called.with(`Server listening on port: 8081`);
+
+				server.close();
+				done();
+			}, SERVER_START_TIMEOUT);
 		});
 	});
 
@@ -98,7 +127,7 @@ describe('vulnerable web application', () => {
 
 		it('should output listening message with default port', () => {
 			const cliFullPath = path.resolve(`${__dirname}/../index.js`);
-			exec(`node "${cliFullPath}"`, { timeout: 500 }, (err, stdout, stderr) => {
+			exec(`node "${cliFullPath}"`, { timeout: SERVER_START_TIMEOUT }, (err, stdout, stderr) => {
 				expect(err).to.not.be.null;
 				expect(stdout).to.include('Server listening on port: 8000');
 				expect(stderr).to.be.empty;
@@ -106,8 +135,8 @@ describe('vulnerable web application', () => {
 		});
 
 		it('should output listening message with argument port', () => {
-			var cliFullPath = path.resolve(`${__dirname}/../index.js`);
-			exec(`node "${cliFullPath}" 8081`, { timeout: 500 }, (err, stdout, stderr) => {
+			const cliFullPath = path.resolve(`${__dirname}/../index.js`);
+			exec(`node "${cliFullPath}" 8081`, { timeout: SERVER_START_TIMEOUT }, (err, stdout, stderr) => {
 				expect(err).to.not.be.null;
 				expect(stdout).to.include('Server listening on port: 8081');
 				expect(stderr).to.be.empty;
