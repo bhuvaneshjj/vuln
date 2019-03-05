@@ -78,16 +78,16 @@ const application = {
 		const { express, app } = utilities.configureExpress();
 		utilities.configureHogan(app);
 		utilities.configureRoutes(config, express, app);
+
 		return utilities.startServer(config, app);
 	},
 	utilities: utilities
 };
 
-console.log(">>> REQUIRE MAIN >>>", require.main, "<<<");
 if (require.main === module) {
 	const args = process.argv.slice(2);
 	const port = (args.length >= 1 ? args[0] : undefined);
-
+	console.log(">>> PORT >>>", port, "<<<");
 	application.start(port);
 } else {
 	module.exports = application;
