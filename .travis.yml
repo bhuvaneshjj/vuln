@@ -1,6 +1,6 @@
 env:
   global:
-  - secure: "Z+RZWE1wGFDFJVRom7psEmdqu2mvaYWmTx4o4/9a2aUCh5lLsbyCKiHH96iJ35sG6+LIIDIhqN+fCqhVlJf3YsHZxWXp6ZotzAowWkO7skUlVOJCyMED8rLQNu71fsoG8f0+LZ88/mKcUNB7N2Esuuzj9+OJCYpS+GCatUdnMTGHmB4lF1Q9lrYI0/qwaQzxaIEEKXM0BvraLDzHJD//2lVULmv6fvp2U1zwTytZXuPKqg+bcPbsbOG33VGWj0ndeMVxn27xTp04rN5s5A3csblKLcQxFC0x56q3PidQ78ihQ1A4cKMWk9sJlKmRTef4Sj4z+F+B195ez6GCbx7hf49AIl3dJX3Zb7LoajyT89eqPScmOejvfz08ywDLQC/oVlwS9H1JOiXJzmURBJ0y/KfL/1F/i2r75c4xy7xtUkP+JwKLdgX82YlQLsL+WznoT1XJYs7bMUrjc/fL0RfQNJsZ93sm21JYaRpM24KhbAsKdUpGjqKT7ylsbwbeYqDY/9CboK4zo/aGYv3m0/k9StUr6EeXXr5FG18B80b7UkuUcOZCo0HQ3R3oDZ/5uTJ9nAV5yIkEofqkzV7r6Mnu0yihH5vhjz9WfGSlEhjhlwm3GDjQS75zlY1Cdh9Kp44nJzy6s7x9UQg2dWtKJo/r3dZKHUglWeH+vdAfUYgb9/g="
+  - secure: S4pmqyq048Pm+NJqeLSvZi1iblX+afVAaJy2VsNg3gAN6vnb9eiIYnPLKFNAA/N7MC1z2lhGJ9EHZ9DLxAgdv+zAUGHmHnwUissye1kavmTWPGRTB4l5Ng7nermanBAg/+a4dk9BhrOEXo7CdzY6+A5jCKny2TNsT8QeOonXUMgBYn6+spnKuCVklhOM2beZCTJfyJY3DMbt4cpUkXDce8FWlpyfI/fRIA2gbdf+HpiW0VywciHBryNzsNj7RLHjnyg8ScZdno8mFEVMfSRsSQJ+1qfs3inkYI83jxL27MIAztG14JJnVUzC6xdfu5xCN6mXEtRmOZfb3WqFhthzEaYcd1J2cly0PTHYefsUACFj6B0MVV+R3244sPGJF3q7whGuT7W9miqbJvhcDj1Mp9vGi69mIbTSgXCVfNN2Z3S7qw3yJsk5EnE/7aaSaHGvuRY4s11stpSDDsgYpAKFPdrsUksTbx5PGXYqXYCrKHLFjt6SOy0RsQuzgMxhUOt9IXjxo76xa6VsY4E3desQp/hL7B1ZFTu/43+JkNs8Za/3nniP2FJZ8vu/+S5PaAloSjUu13zWd+8cM4NnVt8zyOdngSwcZksInqMzN046wURsxKqGRghCMhvCppvbdMdvQAjX+o1EBvcvng0FToW3Thj6RObicJjF/3b+WXbMzV8=
 
 dist: trusty
 
@@ -20,7 +20,7 @@ addons:
       description: "Vulnerable Web Application"
     notification_email: pat@themorrowgroup.com
     build_command_prepend: ""
-    build_command: "--dir id --fs-capture-search . --no-command"
+    build_command: "--no-command --fs-capture-search ./ --fs-capture-search-exclude-regex coverage --fs-capture-search-exclude-regex node_modules"
     branch_pattern: master
 
 before_install:
