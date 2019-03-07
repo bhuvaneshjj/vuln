@@ -8,12 +8,11 @@ language: node_js
 node_js:
 - lts/*
 
-#addons:
-#  sonarcloud:
-#    organization: psmorrow-github
-#    token:
-#      secure: iLmf7Tx0zHPh7Jd9jM3xGDhua2fyb5qLTkRhkFJisenbgZ69SXEcA7ihc1jParZneYNKeRx/aFBJD16x6lo+kbiuyckb1HKnw+VFoDS1Rjy2LfLWG2I4PlyQisu+mwAth5/oCoYjU1nKMQPUUMIPbBCxCMdcQ+N0On9+KwVEIv6Ahj7nJDK45QCNKF4DNSmxYwuw/EQYsMtni/B8IGRyM3Cz03yrPs1qkrnaOqs7YXb7O47S7zBJmoe6I5Japev3YAF2qOn4LJxqTkq715PIk5O0L2cCWEi3/kz/W4WZpskm75rGdyGOI6ItyCq80+fgGHaIxGNuoEI4fkkfkxg8MISFMC37JrJyKSzUBVmvSDOZ+f/YbSsm1u7eZCtFgzPy0FD7Fv2/2Fh4G7T0EVGkQFF8eY44afxo9yOqviv1FjiOLZh+1dYQW2zLDFRBkroOpnUxFEFe6DasCFOs+ipDCkuUBZSdOpNNSjCiTF3DvycmdTooRLLq1Mkmg2RU5tjFkTSrnjdzLnJ5yEY9/RYORbjgsfNoPLKSvgT4mtr90Ft3njXVpalpwgvvZRL3/5wHo+ATWjAl6ZR13cS04nz/nVxiIS8wE4dmW446tjEHOn6KRmwmS3OLH0wYwBSe6IhOOR7RQHMaMzywrF4D12SUZe49qSeFiY3Wl6MpfRR5Hu4=
 addons:
+  sonarcloud:
+    organization: psmorrow-github
+    token:
+      secure: iLmf7Tx0zHPh7Jd9jM3xGDhua2fyb5qLTkRhkFJisenbgZ69SXEcA7ihc1jParZneYNKeRx/aFBJD16x6lo+kbiuyckb1HKnw+VFoDS1Rjy2LfLWG2I4PlyQisu+mwAth5/oCoYjU1nKMQPUUMIPbBCxCMdcQ+N0On9+KwVEIv6Ahj7nJDK45QCNKF4DNSmxYwuw/EQYsMtni/B8IGRyM3Cz03yrPs1qkrnaOqs7YXb7O47S7zBJmoe6I5Japev3YAF2qOn4LJxqTkq715PIk5O0L2cCWEi3/kz/W4WZpskm75rGdyGOI6ItyCq80+fgGHaIxGNuoEI4fkkfkxg8MISFMC37JrJyKSzUBVmvSDOZ+f/YbSsm1u7eZCtFgzPy0FD7Fv2/2Fh4G7T0EVGkQFF8eY44afxo9yOqviv1FjiOLZh+1dYQW2zLDFRBkroOpnUxFEFe6DasCFOs+ipDCkuUBZSdOpNNSjCiTF3DvycmdTooRLLq1Mkmg2RU5tjFkTSrnjdzLnJ5yEY9/RYORbjgsfNoPLKSvgT4mtr90Ft3njXVpalpwgvvZRL3/5wHo+ATWjAl6ZR13cS04nz/nVxiIS8wE4dmW446tjEHOn6KRmwmS3OLH0wYwBSe6IhOOR7RQHMaMzywrF4D12SUZe49qSeFiY3Wl6MpfRR5Hu4=
   coverity_scan:
     project:
       name: "psmorrow/vulnerable-web-application"
@@ -31,4 +30,4 @@ before_install:
 script:
 - npm run lint
 - npm test
-#- sonar-scanner
+- sonar-scanner
