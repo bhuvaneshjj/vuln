@@ -1,15 +1,33 @@
+env:
+  global:
+  - secure: "Gmj3cs6xjUt1cf3ITseNqC0G0BS3yIcDpWclPkClqqMvA9yX+US1vlhXgec5b8Vmyi3VqhWSLg1B0nFNPkf/UTSr27X7v4xYNxi0YpqNLzLhvvIVGvSa0F6JJR4K7R47YzFOP7yYpG5wMBJcgadwzy/lKApQ0mqhIrD1Ow4cjume0diMHcuy3XJ3C/5OmvEoxHo0WtQPLPHCt75/0hoc5H/kgppl2Jsk1dg1DISlv05ntXIM54ubwraaECKeiseYDAl2OX3om6LPzVL/uqWOdeH617o/unqtcw6lpyMPW95n/bRIiC/abCtdaTaaDHgJkNOwU+kvNwBxxz3Id2prCrUwIiBKg4pAQgBLLj+LOe5FhCoq+3AO/sF9YYNBmI3WhvZoermA9GdnJogB11DAlDLBr9++I63nP55iFobpmAl5F7qfTRn3tWdFAym2Ss+3LxKmYF5fOhLZ2gPIyd7WVugMktU5+Jshd2A9oZM+7ZxoIIM8j6BVDwQIGvjsX64eEdttAZiBT0wJrmnpPGBRpPmNQyVSUQ6p2dK5t5p1+7DJ1HcwB0AOSBiFcOJTtZkA63U4Q77CDtcQvGowtNsVWCxPVIy3WFJBm/BC7v5jzGb2Dfvpxd2cgfuOBQISN5uJ5v+wmq+scdW4Rm4SkhjM3gP49fpH+R1W1TrtP9X1l7I="
+
 dist: trusty
+
 language: node_js
+
 node_js:
 - lts/*
+
 addons:
   sonarcloud:
     organization: psmorrow-github
     token:
       secure: iLmf7Tx0zHPh7Jd9jM3xGDhua2fyb5qLTkRhkFJisenbgZ69SXEcA7ihc1jParZneYNKeRx/aFBJD16x6lo+kbiuyckb1HKnw+VFoDS1Rjy2LfLWG2I4PlyQisu+mwAth5/oCoYjU1nKMQPUUMIPbBCxCMdcQ+N0On9+KwVEIv6Ahj7nJDK45QCNKF4DNSmxYwuw/EQYsMtni/B8IGRyM3Cz03yrPs1qkrnaOqs7YXb7O47S7zBJmoe6I5Japev3YAF2qOn4LJxqTkq715PIk5O0L2cCWEi3/kz/W4WZpskm75rGdyGOI6ItyCq80+fgGHaIxGNuoEI4fkkfkxg8MISFMC37JrJyKSzUBVmvSDOZ+f/YbSsm1u7eZCtFgzPy0FD7Fv2/2Fh4G7T0EVGkQFF8eY44afxo9yOqviv1FjiOLZh+1dYQW2zLDFRBkroOpnUxFEFe6DasCFOs+ipDCkuUBZSdOpNNSjCiTF3DvycmdTooRLLq1Mkmg2RU5tjFkTSrnjdzLnJ5yEY9/RYORbjgsfNoPLKSvgT4mtr90Ft3njXVpalpwgvvZRL3/5wHo+ATWjAl6ZR13cS04nz/nVxiIS8wE4dmW446tjEHOn6KRmwmS3OLH0wYwBSe6IhOOR7RQHMaMzywrF4D12SUZe49qSeFiY3Wl6MpfRR5Hu4=
+  coverity_scan:
+    project:
+      name: "psmorrow/vulnerable-web-application"
+      description: "Vulnerable Web Application"
+    notification_email: pat@themorrowgroup.com
+    build_command_prepend: ""
+    build_command: "--dir id --fs-capture-search . --no-command"
+    branch_pattern: master
+
 before_install:
 - npm version 1.0.$TRAVIS_BUILD_NUMBER
 - sed -i -e "s/sonar.projectVersion=1.0.0/sonar.projectVersion=1.0.$TRAVIS_BUILD_NUMBER/g" sonar-project.properties
+- echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
 script:
 - npm run lint
 - npm test
