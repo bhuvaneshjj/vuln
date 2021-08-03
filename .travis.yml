@@ -1,0 +1,33 @@
+env:
+  global:
+  - secure: sDrRhzNxizjKIl9TLSiqhNNGeGTRVHhpsM3yA+eLWcwIjphJ9Sob+FMxND3Gb1dbHYzHkRytj1c2E+AMvmLxu9iv7JuM84BLH11iTaTUPMyHhtfpZCgXGDiZH2j0819NCmSKBF3mUBRhjldSf67KrZBLcsokV4BVp1+unxyeQeKRJ//gmcsq1glaFIqscOqf+C2Eai2Szui09gXcj0aUBAC2ButdqFpkXs25GigYxFRoOZ3qxj84l2/XTrUWTvq6jpE+blXC4AtYKUhfbxhO5KBm8gwFdgJp72S5OmbDnhVdOU4IH+ZsZrGe018M65canbH6py5xjLlecFxscj1E5WQlWaZDOmIHSXJ9KlVHTu3xEF189sn/w6+mZvH4jD/21IphY3okBdVntCHo/AyizNGt88zyJVuow/2E7PAy5XMUdvLFpnoEe9SfrevbuBvyEWQbDfbCBtICSV9MQR7hEzLq+I+cAGpgiJaoM42pH5UIEeAHCnUaDITqyLAIfmhKdgVg2EtS+0KlWu/uhlwbyFqeNq28mx4moTUa1WxXzVIwuZoMXDjU8na0GHmMf9l22eDXPGuAEGIuFqhmqs/XPNwVC5rlgUF+8sdOrEN+iicbUBCBwpcZZfQ1wD+KAXcmd8rI/dgKvC8oEovZdq8PKw16qz8tgeXBAGSEKDisRwE=
+dist: trusty
+
+language: node_js
+node_js:
+- lts/*
+
+addons:
+  sonarcloud:
+    organization: psmorrow-github
+    token:
+      secure: sDrRhzNxizjKIl9TLSiqhNNGeGTRVHhpsM3yA+eLWcwIjphJ9Sob+FMxND3Gb1dbHYzHkRytj1c2E+AMvmLxu9iv7JuM84BLH11iTaTUPMyHhtfpZCgXGDiZH2j0819NCmSKBF3mUBRhjldSf67KrZBLcsokV4BVp1+unxyeQeKRJ//gmcsq1glaFIqscOqf+C2Eai2Szui09gXcj0aUBAC2ButdqFpkXs25GigYxFRoOZ3qxj84l2/XTrUWTvq6jpE+blXC4AtYKUhfbxhO5KBm8gwFdgJp72S5OmbDnhVdOU4IH+ZsZrGe018M65canbH6py5xjLlecFxscj1E5WQlWaZDOmIHSXJ9KlVHTu3xEF189sn/w6+mZvH4jD/21IphY3okBdVntCHo/AyizNGt88zyJVuow/2E7PAy5XMUdvLFpnoEe9SfrevbuBvyEWQbDfbCBtICSV9MQR7hEzLq+I+cAGpgiJaoM42pH5UIEeAHCnUaDITqyLAIfmhKdgVg2EtS+0KlWu/uhlwbyFqeNq28mx4moTUa1WxXzVIwuZoMXDjU8na0GHmMf9l22eDXPGuAEGIuFqhmqs/XPNwVC5rlgUF+8sdOrEN+iicbUBCBwpcZZfQ1wD+KAXcmd8rI/dgKvC8oEovZdq8PKw16qz8tgeXBAGSEKDisRwE=
+  coverity_scan:
+    project:
+      name: "bhuvaneshjj/vuln"
+      description: "Vulnerable Web Application"
+    notification_email: testphishing007@yahoo.com
+    build_command_prepend: ""
+    build_command: "--no-command --fs-capture-search ./ --fs-capture-search-exclude-regex coverage --fs-capture-search-exclude-regex node_modules"
+    branch_pattern: master
+  srcclr: true
+
+before_install:
+- npm version 1.0.$TRAVIS_BUILD_NUMBER
+- sed -i -e "s/sonar.projectVersion=1.0.0/sonar.projectVersion=1.0.$TRAVIS_BUILD_NUMBER/g" sonar-project.properties
+- echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+script:
+- npm run lint
+- npm test
+- sonar-scanner
